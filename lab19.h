@@ -70,6 +70,59 @@ void Unit::newTurn(){
 //
 //
 //
+bool  Unit ::isDead(){
+
+	if(hp<=0) return true;
+	else{
+		return false;
+	}
+
+}
+void Unit ::guard(){
+
+	guard_on=true;
+
+}
+
+
+int Unit :: heal()
+{
+
+	int php,realh,moreheal;
+	php =rand() %19 +11;
+	hp+=php;
+	if(hp>=hpmax){
+		moreheal=hp-hpmax;
+		hp=hpmax;
+		realh=php-moreheal;
+	}
+	else{
+		realh=php;
+	}
+	return realh;
+}
+
+int  Unit :: attack(Unit &en){
+	
+	//cout << ">>>" << en.name << " Attacked\n";
+	en.beAttacked(atk);
+	//tytyt
+	//return en.beAttacked(atk);
+
+
+}
+
+int Unit :: beAttacked(int oppatk){
+
+	int dmg = oppatk-def;
+	if(guard_on) dmg = dmg/3;
+	if(dmg<0) dmg=0;
+	hp= hp-dmg;
+	return dmg;
+	
+	
+
+}
 
 void drawScene(char p_action,int p,char m_action,int m){
 	cout << "                                                       \n";
